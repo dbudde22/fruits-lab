@@ -38,7 +38,6 @@ app.get('/fruits', (req, res) => {
 })
 
 app.get('/fruits/:name', (req,res, next) => {
-    const fruit = fruits[req.params.name];
     for (i=0; i<fruits.length; i++) {
         if (fruits[i] == req.params.name) {
             res.send(req.params.name);
@@ -56,11 +55,14 @@ app.get('/veggies', (req, res) => {
     res.send(veggies);
 })
 
-app.get('/veggies/:name', (req,res) => {
-    const veggie = veggies[req.params.name];
-    res.send(veggie);
+app.get('/veggies/:veg', (req,res,next) => {
+    for (i=0; i<veggies.length; i++) {
+        if (veggies[i] == req.params.veg) {
+            res.send(req.params.veg);
+        }
+    }
+    next();
 })
-
 
 // catch-all route
 app.get('*', (req, res) => {
